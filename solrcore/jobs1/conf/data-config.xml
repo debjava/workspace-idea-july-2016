@@ -1,0 +1,18 @@
+<dataConfig>
+	<dataSource name="jdbc" driver="oracle.jdbc.OracleDriver"
+		url="jdbc:oracle:thin:@localhost:1521/xe" user="test" password="test" />
+	<document>
+		<entity name="jobs" pk="ID" 
+			query="select * from jobs"
+			deltaImportQuery="select * from jobs where ID='${dih.delta.id}'"
+			deltaQuery="select id from jobs where updated_date > to_date('${dataimporter.last_index_time}', 'yyyy-mm-dd hh24:mi:ss')">
+			
+            <!-- deltaQuery="select id from jobs where updated_date > '${dataimporter.last_index_time}'"> -->
+			<!-- deltaQuery="select id from jobs where last_modified > '${dataimporter.last_index_time}'"> -->
+			<!-- <field column="ID" name="id" /> <field column="NAME" name="name" 
+				/> <field column="DESCRIPTION" name="description" /> <field column="LOCATION" 
+				name="location" /> <field column="COUNTRY" name="country" /> -->
+		</entity>
+	</document>
+</dataConfig>
+
